@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/aui/aui.2.0.css">
+    <style>
+        html,body,#weixinContent{
+            width:100%;
+            height:100%;
+        }
+        #weixinContent{
+            position: fixed;
+            top: 0;
+             background:rgba(1,0,0,0.2);
+             z-index: 100;
+            text-align:center;
+            font-size: 2rem;
+
+         }
+        .content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<div class="news">
+    <ul>
+        <% for(var i=0; i<items.length; i++) { %>
+        <li>
+            <a href='<%= items[i].url %>'>
+                <%= items[i].title %>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="/javascripts/zepto.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+</html>
