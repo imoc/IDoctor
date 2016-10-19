@@ -109,7 +109,15 @@ router.get('/huozhoutvNews/detail', function(req, res, next) {
 
         var item = new Object();
         item.title = $('td.a2 strong').text();
-        item.pubtime = $('span.info_text ').text().match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/g)[0]	;
+        // item.pubtime = $('span.info_text ').text().match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/g)[0]	;
+        var pubtimeArray = $('span.info_text ').text().match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/g);
+        // console.log(pubtimeArray + "- "+pubtimeArray.length);
+        if (pubtimeArray!=null&&pubtimeArray.length>0){
+          item.pubtime = pubtimeArray[0];
+          console.log(item.pubtime);
+        }else {
+          item.pubtime = '2016-09-19';
+        }
         item.source = $('span.info_text a').eq(0).text();
         item.content = $('#text').html();
         item.popular = 100;
