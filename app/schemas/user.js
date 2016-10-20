@@ -9,9 +9,39 @@ var UserSchema = new mongoose.Schema({
         type: String
     },
     password: String,
+    mail: String,
+    birth: {
+        type:Date,
+        default:Date.now()
+    },
+    sex:{
+        type:Number,
+        default:0
+    },
+    sign: String,
+    point:{
+        type:Number,
+        default:0
+    },
+    level:{
+        type:Number,
+        default:0
+    },
+    money:{
+        type:Number,
+        default:0
+    },
     role:{
         type:Number,
         default:0
+    },
+    phone:{
+        number: {
+            type:String
+        },
+        brand:{
+            type:String
+        }
     },
     meta:{
         crateAt: {

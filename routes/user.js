@@ -12,12 +12,13 @@ router.get('/', function(req, res, next) {
 //   res.render('login', { title: '登录'});
 // });
 
-// User
-router.post('/signup', User.signup)
-router.post('/signin', User.signin)
-router.get('/signin', User.showSignin)
-router.get('/signup', User.showSignup)
-router.get('/logout', User.logout)
-router.get('/admin/userlist', User.signinRequired, User.adminRequired, User.list)
+// User个体
+router.post('/signup',User.logoutRequired, User.signup);
+router.post('/signin',User.logoutRequired, User.signin);
+router.get('/userCenter', User.signinRequired, User.showUserCenter);
+router.get('/signin', User.logoutRequired, User.showSignin);
+router.get('/signup', User.logoutRequired, User.showSignup);
+router.get('/logout', User.logout);
+router.get('/admin/userlist', User.signinRequired, User.adminRequired, User.list);
 
 module.exports = router;

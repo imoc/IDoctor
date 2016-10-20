@@ -37,8 +37,10 @@ app.use(session({
   store: new mongoStore({
     url: dbUrl,
     collection: 'sessions'
-  })
-  // ,cookie: { maxAge: 60 * 1000 }
+  }),
+  cookie: {
+    maxAge: 1 * 60 * 60 * 1000
+  }//1hour;
 }));
 
 app.use('/', routes);

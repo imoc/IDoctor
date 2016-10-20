@@ -5,9 +5,9 @@ var crawler = require('../util/crawler');
 var url='http://www.rayli.com.cn/juhe/奢侈品牌Logo';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/raylijuhe', function(req, res, next) {
   // 瑞丽聚合
-/*  var url='http://www.rayli.com.cn/juhe/奢侈品牌Logo';
+  var url='http://www.rayli.com.cn/juhe/奢侈品牌Logo';
   crawler.crawler(url,
     function ($) {
       var posts=$(".cur");
@@ -26,39 +26,43 @@ router.get('/', function(req, res, next) {
   },
     function (items) {
       res.render('news', { title: 'news',items: items});
-    });*/
+    });
+});
 
-// 霍州新闻
-  var page = req.query.page;
-  console.log('page - '+ page);
-  var url='http://www.huozhoutv.com/xinwen/hz/index_'+page+'.html';
-  console.log('url - '+ url);
-  var host = 'http://www.huozhoutv.com';
-  crawler.crawler(url,
-      function ($) {
-        var posts=$(".movie_list li");
-        var items = new Array();
-        posts.each(function(index,element){
+/* GET home page. */
+router.get('/', function(req, res, next) {
 
-          var title = $(element).find('a').text()	;
-          var url = host + $(element).find('a').attr('href');
-          var pubDate = $(element).find('span').text();
-          var item = {title: title, url: url , pubDate: pubDate};
-          console.log("title - " + title);
-          // console.log(JSON.stringify(item));
-          items.push(item);
+    // 霍州新闻
+    var page = req.query.page;
+    console.log('page - '+ page);
+    var url='http://www.huozhoutv.com/xinwen/hz/index_'+page+'.html';
+    console.log('url - '+ url);
+    var host = 'http://www.huozhoutv.com';
+    crawler.crawler(url,
+        function ($) {
+            var posts=$(".movie_list li");
+            var items = new Array();
+            posts.each(function(index,element){
+
+                var title = $(element).find('a').text()	;
+                var url = host + $(element).find('a').attr('href');
+                var pubDate = $(element).find('span').text();
+                var item = {title: title, url: url , pubDate: pubDate};
+                console.log("title - " + title);
+                // console.log(JSON.stringify(item));
+                items.push(item);
+            });
+            // console.log(JSON.stringify(items));
+            return items ;
+        },
+        function (items) {
+            // var resJsonObj = {"data":[{"title":123},{"title":222}]};
+            var resJsonObj = {'code':"1",'msg':"获取成功",'data':items};
+            console.log(JSON.stringify(items));
+            res.end(JSON.stringify(resJsonObj));
+
+
         });
-        // console.log(JSON.stringify(items));
-        return items ;
-      },
-      function (items) {
-        // var resJsonObj = {"data":[{"title":123},{"title":222}]};
-        var resJsonObj = {'code':"1",'msg':"获取成功",'data':items};
-         console.log(JSON.stringify(items));
-        res.end(JSON.stringify(resJsonObj));
-
-
-      });
 
 });
 

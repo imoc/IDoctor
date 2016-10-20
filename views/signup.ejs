@@ -12,7 +12,7 @@
     <a class="aui-pull-left aui-btn">
       <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">登录</div>
+    <div class="aui-title"><%= title %></div>
   </header>
   <div class="aui-content aui-margin-b-15">
     <form method="POST" action="/user/signup">
@@ -21,7 +21,7 @@
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <div class="aui-list-item-label">
-              Text
+              Name
             </div>
             <div class="aui-list-item-input">
               <input type="text" placeholder="Name" name="user[name]">
@@ -41,6 +41,66 @@
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <div class="aui-list-item-label">
+              mail
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="mail" name="user[mail]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
+              手机号
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="手机号" name="user[phone[number]]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
+              手机型号
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="手机型号" name="user[phone[brand]]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
+              point
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="point" name="user[point]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
+              money
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="money" name="user[money]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
+              level
+            </div>
+            <div class="aui-list-item-input">
+              <input type="text" placeholder="等级" name="user[level]">
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-label">
               Number
             </div>
             <div class="aui-list-item-input">
@@ -51,11 +111,11 @@
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <div class="aui-list-item-label">
-              Radio
+              性别
             </div>
             <div class="aui-list-item-input">
-              <label><input class="aui-radio" type="radio" name="demo1" checked> 选项一</label>
-              <label><input class="aui-radio" type="radio" name="demo1"> 选项二</label>
+              <label><input class="aui-radio" type="radio" name="user[sex]" value="2" checked> 男</label>
+              <label><input class="aui-radio" type="radio" name="user[sex]" value="1"> 女</label>
             </div>
           </div>
         </li>
@@ -76,10 +136,10 @@
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <div class="aui-list-item-label">
-              Switch
+              记住密码
             </div>
             <div class="aui-list-item-input">
-              <input type="checkbox" class="aui-switch" checked>
+              <input type="checkbox" class="aui-switch" name="remmber" checked>
             </div>
           </div>
         </li>
@@ -98,10 +158,10 @@
         <li class="aui-list-item">
           <div class="aui-list-item-inner">
             <div class="aui-list-item-label">
-              Textarea
+              签名
             </div>
             <div class="aui-list-item-input">
-                      <textarea placeholder="Textarea"></textarea>
+                      <textarea placeholder="Textarea" name="user[sign]"></textarea>
             </div>
           </div>
         </li>

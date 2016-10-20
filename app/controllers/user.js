@@ -18,6 +18,13 @@ exports.showSignin = function (req,res) {
     });
 };
 
+exports.showUserCenter = function (req,res) {
+    res.locals.user = req.session ? req.session.user:'';
+    res.render('userCenter',{
+        title: '个人中心'
+    });
+};
+
 exports.signup = function (req,res) {
     var _user = req.body.user;
     console.log("req - "+JSON.stringify(req.body));
@@ -29,11 +36,19 @@ exports.signup = function (req,res) {
         if (user){
             return res.redirect('/user/sigin');
         }else{
+            _user.phone = {
+                number:_user.number,
+                brand:_user.brand
+            };
+            delete _user.number;
+            delete _user.brand;
+
             user = new User(_user);
             user.save(function (err,user) {
                 if (err){
                     console.log(err);
                 }
+                req.session.user = user;
                 res.redirect('/');
             });
         }
@@ -59,6 +74,7 @@ exports.signin = function (req,res) {
             if(isMatch){
                 console.log(JSON.stringify(user));
                 req.session.user = user;
+                // res.cookie("user", {username: user.name}, {maxAge: 600000 , httpOnly: false});
                 console.log("login success - "+JSON.stringify(req.session));
                 return res.redirect('/');
             }else{
@@ -89,7 +105,14 @@ exports.list = function (req,res) {
 exports.signinRequired = function (req,res,next) {
     var user = req.session.user;
     if(!user){
-        return res.redirect('/user/sinnin');
+        return res.redirect('/user/signin');
+    }
+    next();
+}
+exports.logoutRequired = function (req,res,next) {
+    var user = req.session.user;
+    if(user){
+        return res.redirect('/');
     }
     next();
 }
