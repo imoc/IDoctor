@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
     // res.send("欢迎第一次访问");
   }
   res.locals.user = req.session ? req.session.user:'';
-  res.render('index', { title: 'Express' });
+  var title = '达芬奇的铁匠铺';
+  res.render('index', { title: title });
 });
 
 module.exports = router;

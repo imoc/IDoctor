@@ -6,11 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
-
+//站点配置
+var settings = require("./app/db/settings");
 // 数据库
 var mongoose = require('mongoose');
-var dbUrl = 'mongodb://localhost/rayli'
-mongoose.connect(dbUrl);
+mongoose.connect(settings.URL);
 
 var routes = require('./routes/index');
 var user = require('./routes/user');
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'rayli',
   store: new mongoStore({
-    url: dbUrl,
+    url: settings.URL,
     collection: 'sessions'
   }),
   cookie: {

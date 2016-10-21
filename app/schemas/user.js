@@ -2,6 +2,10 @@
  * Created by lilxiaowei on 2016-10-19.
  */
 var mongoose = require('mongoose');
+//数据库操作对象
+var DbOpt = require("../db/Dbopt");
+//站点配置
+var settings = require("../db/settings");
 
 var UserSchema = new mongoose.Schema({
     name:{
@@ -62,12 +66,16 @@ UserSchema.pre('save',function (next) {
     }else {
         this.meta.updateAt = Date.now();
     }
+
+    user.password = DbOpt.encrypt(user.password,settings.encrypt_key);
+
     next();
 });
 
 UserSchema.methods = {
     comparePassword:function (_password,cb) {
-        cb(null,_password===this.password);
+        var newPsd = DbOpt.encrypt(_password,settings.encrypt_key);
+        cb(null,newPsd===this.password);
     }
 };
 UserSchema.statics = {

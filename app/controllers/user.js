@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var User = require('../models/user');
+var DateUtil = require('../../util/DateUtil');
 // var User = mongoose.model('User');
 
 //signup
@@ -34,8 +35,10 @@ exports.signup = function (req,res) {
             console.log(err);
         }
         if (user){
-            return res.redirect('/user/sigin');
+            console.warn( DateUtil.now() +  ' -- user has exist !');
+            return res.redirect('/user/signin');
         }else{
+            console.info( DateUtil.now() +  ' -- new user has registered successfully !');
             _user.phone = {
                 number:_user.number,
                 brand:_user.brand
@@ -65,6 +68,7 @@ exports.signin = function (req,res) {
             console.log(err);
         }
         if(!user){
+            console.warn( DateUtil.now() +  ' --  user no exist !');
             return res.redirect('/user/signup');
         }
         user.comparePassword(password,function (err,isMatch) {
@@ -72,12 +76,14 @@ exports.signin = function (req,res) {
                 console.log(err);
             }
             if(isMatch){
+                console.info( DateUtil.now() +  ' -- new user has login successfully !');
                 console.log(JSON.stringify(user));
                 req.session.user = user;
                 // res.cookie("user", {username: user.name}, {maxAge: 600000 , httpOnly: false});
                 console.log("login success - "+JSON.stringify(req.session));
                 return res.redirect('/');
             }else{
+                console.warn(new Date().getDate() +  ' -- Account or password error');
                 return res.redirect('/user/signin');
             }
         });
@@ -86,6 +92,7 @@ exports.signin = function (req,res) {
 
 exports.logout = function (req,res) {
     delete req.session.user;
+    console.info( DateUtil.now() +  ' -- user has logout !');
     res.redirect('/');
 }
 
