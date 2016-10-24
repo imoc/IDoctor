@@ -14,6 +14,11 @@ var UserSchema = new mongoose.Schema({
     },
     password: String,
     mail: String,
+    avatar:{
+        unique:true,
+        type: String,
+        default:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4287935292,2728355048&fm=116&gp=0.jpg'
+    },
     birth: {
         type:Date,
         default:Date.now()

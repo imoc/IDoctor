@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var api = require('./api');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,5 +15,6 @@ router.get('/', function(req, res, next) {
   var title = '达芬奇的铁匠铺';
   res.render('index', { title: title });
 });
+router.use('/api', api);
 
 module.exports = router;
