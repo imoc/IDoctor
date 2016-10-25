@@ -12,6 +12,8 @@ module.exports = {
     session_secret: 'doracms_secret', // 务必修改
     auth_cookie_name: 'doracms',
     encrypt_key : 'dora',
+    jwtTokenSecret: "jwtTokenSecret",//token 生成密钥
+    expiresIn:'2h',//token 过期时间 expressed in seconds or a string describing a time span rauchg/ms. Eg: 60s, "2 days", "10h", "7d"
     
 //    数据库配置
     URL: 'mongodb://127.0.0.1:27017/rayli',

@@ -15,6 +15,8 @@ router.get('/', function(req, res, next) {
 // User个体
 router.post('/login', Api.api.login);
 router.post('/register', Api.api.register);
+router.post('/auth', Api.api.auth);
+router.post('/peasonInf', Api.api.check_api_token, Api.api.peasonInf);
 // router.post('/signin',User.logoutRequired, User.signin);
 // router.get('/userCenter', User.signinRequired, User.showUserCenter);
 // router.get('/signin', User.logoutRequired, User.showSignin);
