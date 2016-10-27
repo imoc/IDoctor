@@ -7,21 +7,14 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-/* GET users listing. */
-// router.get('/login', function(req, res, next) {
-//   res.render('login', { title: '登录'});
-// });
-
 // User个体
-router.post('/login', Api.api.login);
+router.post('/login', Api.api.auth);
 router.post('/register', Api.api.register);
 router.post('/auth', Api.api.auth);
-router.post('/peasonInf', Api.api.check_api_token, Api.api.peasonInf);
-// router.post('/signin',User.logoutRequired, User.signin);
-// router.get('/userCenter', User.signinRequired, User.showUserCenter);
-// router.get('/signin', User.logoutRequired, User.showSignin);
-// router.get('/signup', User.logoutRequired, User.showSignup);
-// router.get('/logout', User.logout);
-// router.get('/admin/userlist', User.signinRequired, User.adminRequired, User.list);
+router.post('/userInfo', Api.api.check_api_token, Api.api.userInfo);
+router.post('/updatePoint', Api.api.check_api_token, Api.api.updatePoint);
+router.post('/userList', Api.api.check_api_token, Api.api.userList);
+router.post('/updateRole', Api.api.check_api_token, Api.api.updateRole);
+router.get('/films', Api.api.check_api_token, Api.api.films);
 
 module.exports = router;

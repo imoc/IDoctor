@@ -2,18 +2,30 @@
  * Created by lilxiaowei on 2016-10-19.
  */
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 //数据库操作对象
 var DbOpt = require("../db/Dbopt");
 //站点配置
 var settings = require("../db/settings");
-
+var validateEmail = function(email) {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email)
+};
 var UserSchema = new mongoose.Schema({
     name:{
         unique:true,
         type: String
     },
     password: String,
-    mail: String,
+    mail:{
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: 'Email address is required',
+        validate: [validateEmail, 'Please fill a valid email address'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
     avatar:{
         unique:true,
         type: String,
@@ -42,7 +54,11 @@ var UserSchema = new mongoose.Schema({
     },
     role:{
         type:Number,
-        default:0
+        default:0 // 0 免费用户，1 付费用户， 5 一级付费用户（一周），6 二级付费用户（一月），7 三级付费用户（三月），10 普通管理员， 100 超级管理员
+    },
+    roleExpeDate:{
+        type:Date,
+        default:Date.now()
     },
     phone:{
         number: {
@@ -71,9 +87,7 @@ UserSchema.pre('save',function (next) {
     }else {
         this.meta.updateAt = Date.now();
     }
-
     user.password = DbOpt.encrypt(user.password,settings.encrypt_key);
-
     next();
 });
 
@@ -83,6 +97,7 @@ UserSchema.methods = {
         cb(null,newPsd===this.password);
     }
 };
+
 UserSchema.statics = {
     fetch: function (cb) {
         return this
@@ -94,7 +109,17 @@ UserSchema.statics = {
         return this
             .findOne({_id:id})
             .exec(cb)
-    }
+    },
+    updatePoint: function (id,point,cb) {
+        return this
+            .update({_id:id},{'$inc':{point:point}})
+            .exec(cb);
+    },
+    updateRole: function (id,role,expDate,cb) {
+        return this
+            .update({_id:id},{'$set':{role:role,roleExpeDate:expDate }})
+            .exec(cb);
+    },
 }
 
 module.exports = UserSchema;
