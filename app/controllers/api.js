@@ -138,7 +138,8 @@ exports.api = {
                         console.info(DateUtil.now() + ' -- user has authed successfully ! - ' + JSON.stringify(user));
                         // 创建token
                         var expires = settings.expiresIn;
-                        var token = jwt.sign(user, settings.jwtTokenSecret, {
+                        var _user = {userId:user._id};
+                        var token = jwt.sign(_user, settings.jwtTokenSecret, {
                             'expiresIn': expires // 设置过期时间
                         });
                         var obj = {
@@ -173,10 +174,11 @@ exports.api = {
                 // 确认token
                 jwt.verify(token, settings.jwtTokenSecret, function (err, decoded) {
                     if (err) {
-                        return res.json({success: false, message: 'token信息错误.'});
+                        var resJsonObj = {code: 2, msg: "token信息错误"};
+                        sendJson(req, res, next, resJsonObj)
                     } else {
                         // 如果没问题就把解码后的信息保存到请求中，供后面的路由使用
-                        req.api_user = decoded._doc;
+                        req.api_user = decoded._doc||{_id: decoded.userId};
                         console.dir(decoded);
                         console.log(DateUtil.now() + ' --  api_user --  ' + JSON.stringify(req.api_user));
                         next();
@@ -184,10 +186,13 @@ exports.api = {
                 });
             } else {
                 // 如果没有token，则返回错误
-                return res.status(403).send({
-                    success: false,
-                    message: '没有提供token！'
-                });
+                // return res.status(403).send({
+                //     success: false,
+                //     message: '没有提供token！'
+                // });
+
+                var resJsonObj = {code: 2, msg: "没有提供token！"};
+                sendJson(req, res, next, resJsonObj)
             }
         }
 
@@ -247,6 +252,7 @@ exports.api = {
             loadMoreVideos: 1 * pointRate,
             refreshVideos: 1 * pointRate,
             marketScore: 5 * pointRate,
+            online: 1 ,
         };
         console.log(DateUtil.now() + ' -- ' + pointType + '--  ' + pointArray[pointType]);
         User.updatePoint(user_id, pointArray[pointType], function (err, result) {
@@ -261,6 +267,7 @@ exports.api = {
                 var data = {
                     uid: user._id,
                     point: user.point,
+                    pointType: pointType,
                     increasedPoint: pointArray[pointType],
                 };
 

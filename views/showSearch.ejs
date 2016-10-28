@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+  <title><%= title %></title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/aui/aui.2.0.css">
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<header class="aui-bar aui-bar-nav">
+  <a class="aui-pull-left aui-btn">
+    <span class="aui-iconfont aui-icon-left"></span>返回
+  </a>
+  <div class="aui-title"><%= title %></div>
+</header>
+<div class="aui-content aui-margin-b-15">
+  <form method="POST" action="/user/doUpdataRode">
+    <ul class="aui-list aui-form-list">
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            Name
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="Name" name="user[name]" value="<%= user.name %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            Password
+          </div>
+          <div class="aui-list-item-input">
+            <input type="password" placeholder="Password" name="user[password]" value="<%= user.password %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            mail
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="mail" name="user[mail]" value="<%= user.mail %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            id
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="mail" name="user[_id]" value="<%= user._id %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            role
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="role" name="user[role]" value="<%= user.role %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            手机号
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="手机号" name="user[phone[number]]" value="<%= user.phone.number %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            手机型号
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="手机型号" name="user[phone[brand]]" value="<%= user.phone.brand %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            point
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="point" name="user[point]" value="<%= user.point %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            money
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="money" name="user[money]" value="<%= user.money %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            level
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="等级" name="user[level]" value="<%= user.level %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            Number
+          </div>
+          <div class="aui-list-item-input">
+            <input type="number" placeholder="Number">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            性别
+          </div>
+          <div class="aui-list-item-input">
+            <label><input class="aui-radio" type="radio" name="user[sex]" value="2" <%= user.sex==2? "checked":"" %> > 男</label>
+            <label><input class="aui-radio" type="radio" name="user[sex]" value="1" <%= user.sex==1? "checked":"" %> > 女</label>
+           <!-- <label><input class="aui-radio" type="radio" name="user[sex]" value="2" checked=" " > 男</label>
+            <label><input class="aui-radio" type="radio" name="user[sex]" value="1" checked=" " > 女</label>-->
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            Select
+          </div>
+          <div class="aui-list-item-input">
+            <select>
+              <option>Option1</option>
+              <option>Option2</option>
+              <option>Option3</option>
+            </select>
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            记住密码
+          </div>
+          <div class="aui-list-item-input">
+            <input type="checkbox" class="aui-switch" name="remmber" checked >
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            Range
+          </div>
+          <div class="aui-list-item-input">
+            <div class="aui-range">
+              <input type="range" class="aui-range" value="30" max="100" min="1" step="1" id="range" />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            签名
+          </div>
+          <div class="aui-list-item-input">
+            <textarea placeholder="Textarea" name="user[sign]"> <%= user.sign %></textarea>
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <a href="/user/logout">退出</a>
+        </div>
+      </li>
+    </ul>
+    <button type="submit">提交</button>
+  </form>
+</div>
+</body>
+</html>

@@ -20,5 +20,8 @@ router.get('/signin', User.logoutRequired, User.showSignin);
 router.get('/signup', User.logoutRequired, User.showSignup);
 router.get('/logout', User.logout);
 router.get('/admin/userlist', User.signinRequired, User.adminRequired, User.list);
+router.get('/search', User.signinRequired, User.adminRequired, User.search);
+router.post('/doSearch', User.signinRequired, User.adminRequired, User.doSearch);
+router.post('/doUpdataRode', User.signinRequired, User.adminRequired, User.doUpdataRode);
 
 module.exports = router;
