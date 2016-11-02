@@ -376,27 +376,32 @@ exports.api = {
     },
     //付费用户的视频权限激活
     films: function (req, res, next) {
-        var user_id = req.api_user._id;
-        console.log(DateUtil.now() + ' -- films--  ' + user_id);
-        //查询视频集合；
-        var count = 15;
-        var items = new Array();
-        for (var i = 0; i < count; i++) {
-            var item = {
-                id: null,
-                // id: i+1,
-                title: 'films1',
-                src: 'http://v.rayli.com.cn/2016-10-18/20161018221511.mp4'
-                // src: 'http://y.syasn.com/p/p1.mp4'
-                // src: 'http://120.52.73.43/adultvideo.science/media/videos/iphone/one_'+(i+1)+'.mp4'
-            };
-            items.push(item);
-        }
-        console.log( DateUtil.now() +  ' --  films -  '+JSON.stringify(items));
-        res.render('films',{
-            title:'type - '+req.query.type,
-            items: items
-        });
+
+        res.redirect('/film/showList');
+
+        // var filmSit = 'http://dy004.com/';
+        // res.redirect(filmSit);
+        // var user_id = req.api_user._id;
+        // console.log(DateUtil.now() + ' -- films--  ' + user_id);
+        // //查询视频集合；
+        // var count = 15;
+        // var items = new Array();
+        // for (var i = 0; i < count; i++) {
+        //     var item = {
+        //         id: null,
+        //         // id: i+1,
+        //         title: 'films1',
+        //         src: 'http://v.rayli.com.cn/2016-10-18/20161018221511.mp4'
+        //         // src: 'http://y.syasn.com/p/p1.mp4'
+        //         // src: 'http://120.52.73.43/adultvideo.science/media/videos/iphone/one_'+(i+1)+'.mp4'
+        //     };
+        //     items.push(item);
+        // }
+        // console.log( DateUtil.now() +  ' --  films -  '+JSON.stringify(items));
+        // res.render('films',{
+        //     title:'type - '+req.query.type,
+        //     items: items
+        // });
 
     },
 }

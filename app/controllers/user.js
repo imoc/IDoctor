@@ -122,7 +122,7 @@ exports.doSearch = function (req,res) {
         });
     });
 }
-exports.doUpdataRode = function (req,res) {
+exports.doUpdateRole = function (req,res) {
     var _user = req.body.user;
     var user_id = _user._id;
     console.log(DateUtil.now() + ' -- activatePermissions--  ' + user_id);
@@ -177,6 +177,7 @@ exports.list = function (req,res) {
 exports.signinRequired = function (req,res,next) {
     var user = req.session.user;
     if(!user){
+        console.warn(DateUtil.now() + ' -- signinRequired--  ');
         return res.redirect('/user/signin');
     }
     next();
@@ -192,6 +193,7 @@ exports.logoutRequired = function (req,res,next) {
 exports.adminRequired = function (req,res,next) {
     var user = req.session.user;
     if(user.role<= 10){
+        console.warn(DateUtil.now() + ' -- adminRequired--  ');
         return res.redirect('/user/signin');
     }
     next();

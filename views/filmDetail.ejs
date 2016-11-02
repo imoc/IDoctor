@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+  <title><%= title %></title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/aui/aui.2.0.css">
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <style>
+    .pic{
+      width: 30%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<header class="aui-bar aui-bar-nav">
+  <a class="aui-pull-left aui-btn">
+    <span class="aui-iconfont aui-icon-left"></span>返回
+  </a>
+  <div class="aui-title"><%= title %></div>
+</header>
+<div class="aui-content aui-margin-b-15">
+  <form method="POST" action="/film/doUpdate">
+    <ul class="aui-list aui-form-list">
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            标题
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="Name" name="film[title]" value="<%= film.title %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            频道
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="type" name="film[type]" value="<%= film.type %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            id
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="id" name="film[_id]" value="<%= film._id %>" readOnly="true">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            画质
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="role" name="film[hd]" value="<%= film.hd %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            视频源
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="视频源" name="film[src]" value="<%= film.src %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            <a href="<%= film.url %>" target="view_window" >来源地址</a>
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="来源地址" disabled="true"　readOnly="true" name="film[url]" value="<%= film.url %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            image
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="image" name="film[image]" value="<%= film.image %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="picWrap">
+          <img class="pic" src="<%= film.image %>" alt="">
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            创建日期
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="创建日期" disabled="true"　readOnly="true" name="film[meta[crateAt]]" value="<%= film.meta.crateAt %>">
+          </div>
+        </div>
+      </li>
+      <li class="aui-list-item">
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-label">
+            修改日期
+          </div>
+          <div class="aui-list-item-input">
+            <input type="text" placeholder="修改日期" disabled="true"　readOnly="true" name="film[meta[updateAt]]" value="<%= film.meta.updateAt %>">
+          </div>
+        </div>
+      </li>
+    </ul>
+    <button type="submit">提交</button>
+  </form>
+</div>
+</body>
+</html>

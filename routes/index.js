@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('./api');
+var film = require('./film');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,5 +17,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: title });
 });
 router.use('/api', api);
+router.use('/film', film);
 
 module.exports = router;

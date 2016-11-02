@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/aui/aui.2.0.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='http://dy004.com/templets/gzh/images/m.css'/>
+  </head>
+  <body>
+  <div class="vlist">
+    <ul>
+      <% for(var i=0; i<items.length; i++) { %>
+      <li class="vlist-con" data-id="<%= items[i].id %>" data-src="<%= items[i].src %>">
+        <div class="img">
+          <a href="<%= items[i].url %>" title="<%= items[i].title %>">
+            <img class="lazy"  src="<%= items[i].image %>" alt="<%= items[i].title %>">
+            <b></b>
+            <p><%= items[i].hd %></p>
+          </a>
+        </div>
+        <div class="vlist-name" >
+          <a href="<%= items[i].src %>" title="<%= items[i].title %>">
+            <p><%= items[i].title %></p>
+          </a>
+        </div>
+      </li>
+      <% } %>
+
+      <!--      <li class="vlist-con"  data-src="http://api.dy004.com/video.php?token=c7ecb3ef1477900172&mobile=1&format=down&guhuo=Qf0d5sUaZj3kplOranlklv5kTlUgEf9dPsVa9fhdYs2aYjO0O0Os">
+              <div class="img">
+                <a href="/video/?444-0-0.html" title="我们诞生在中国">
+                  <img class="lazy"  src="http://ww3.sinaimg.cn/mw690/005BjCpAjw1f77qd42zz5j30bw0gon0h.jpg" alt="我们诞生在中国">
+                  <b></b>
+                  <p>高清</p>
+                </a>
+              </div>
+              <div class="vlist-name" >
+                <a href="/video/?444-0-0.html" title="我们诞生在中国">
+                  <p>我们诞生在中国</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="vlist-con"  data-src="http://api.dy004.com/video.php?token=ff7110531477900526&mobile=1&format=down&guhuo=Qf0d5s6aRjTkNlOrVnEklv6kTlWgcf9dPsVa9fhdYs2aYjO0O0Os">
+              <div class="img">
+                <a href="/video/?442-0-0.html" title="我们都是坏孩子">
+                  <img class="lazy"  src="http://ww3.sinaimg.cn/mw690/005BjCpAgw1f0owgdlzprj30960dmjrx.jpg" alt="我们都是坏孩子">
+                  <b></b>
+                  <p>高清</p>
+                </a>
+              </div>
+              <div class="vlist-name">
+                <a href="/video/?442-0-0.html" title="我们都是坏孩子">
+                  <p>我们都是坏孩子</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="vlist-con">
+              <div class="img">
+                <a href="/video/?441-0-0.html" title="德惠翁主">
+                  <img class="lazy"  src="http://ww2.sinaimg.cn/mw690/005BjCpAjw1f7tnpzyrauj30bn0gon0c.jpg" alt="德惠翁主">
+                  <b></b>
+                  <p>高清</p>
+                </a>
+              </div>
+              <div class="vlist-name">
+                <a href="/video/?441-0-0.html" title="德惠翁主">
+                  <p>德惠翁主</p>
+                </a>
+              </div>
+            </li>-->
+
+
+    </ul>
+    <script type="text/javascript" src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript" src="/javascripts/util.js"></script>
+  <script>
+    /**
+     * android 特殊分享方法；
+     */
+    function playVidio(title, src, id){
+      // 使用各种视频播放器
+      var VidioType = {
+        system :'system',
+        app_native :'app_native',
+        youku :'youku',
+      }
+      // 权控控制
+      var authType = {
+        youku :3,
+        small :1,
+        big :2,
+        other:0
+      }
+//      location.href = src;
+      var type = VidioType.system || 0;
+//      var scriptStr = 'playVidio("' + type +'","' + title +'","' + src +'","' + id + '");';
+      var type = authType.other || 0;
+      var scriptStr = 'playVidioUsePlayerByType("' + type +'","' + src +'");';
+      console.log(title+"-"+src+"-"+id+'-'+type)
+
+      var filmObj = {
+        type:type,
+        title:title,
+        src:src,
+        id:id,
+      }
+//      var scriptStr = "openVideoDetail('"+JSON.stringify(filmObj)+"');";
+      console.log("scriptStr - " +scriptStr)
+      api.execScript({
+        name: 'root',
+        script:scriptStr
+      });
+    }
+
+    window.onload = function () {
+
+      console.log(browser.versions.isActionApp);
+//      $('.vlist-con .img a').attr('href','javascript:void(0);');
+      if(browser.versions.isActionApp){
+        $('.vlist-con .img a').attr('href','javascript:void(0);');
+      }
+
+      $('.vlist-con').each(function(index){
+        var parent =  $(this);
+        parent.on('click', function(e){
+          var title =  $('a',parent).eq(0).attr('title');
+          var src =  parent.data('src');
+          var id =  parent.data('id');
+          playVidio(title, src, id);
+        });
+
+        $('.vlist-name a',parent).attr('href','/film/detail/'+parent.data('id'));
+      });
+    }
+  </script>
+  </body>
+</html>

@@ -1,5 +1,8 @@
 var crawler = require('../../util/crawler');
-
+var mongoose = require('mongoose');
+var Film = require('../models/film');
+var DateUtil = require('../../util/DateUtil');
+// var User = mongoose.model('User');
 // inxde
 exports.index = function(req, res, next) {
     var items = [];
@@ -102,4 +105,92 @@ exports.huozhoutvNewsDetail = function(req, res, next) {
             res.end(JSON.stringify(resJsonObj));
 
         });
+}
+
+// 电影列表
+exports.films = function(req, res, next) {
+
+    // var host = 'http://dy004.com/list/index1_1.html';
+    var type = req.query.type||1;
+    var page = req.query.page||1;
+    console.log('type - '+ type +'  page - '+ page);
+    var host = 'http://dy004.com';
+    var url= host+'/list/index'+type+(page>1?('_'+page):'')+'.html';
+    var host = 'http://dy004.com';
+    var url= host+'/list/index'+type+(page>1?('_'+page):'')+'.html';
+    console.log('url - '+ url);
+    craw(type,page);
+    function craw(type,page) {
+        var url= host+'/list/index'+type+(page>1?('_'+page):'')+'.html';
+        console.log('type - '+ type +'  page - '+ page);
+        crawler.crawler(url,
+            function ($) {
+                var posts=$(".vlist .vlist-con");
+                var items = new Array();
+                posts.each(function(index,element){
+
+                    var title = $(element).find('.vlist-name p').text();
+                    var url = host + $(element).find('.vlist-name a').attr('href');
+                    var image = $(element).find('.img img').attr('src');
+                    var hd = $(element).find('.img p').text();
+                    var item = {title: title, type: type , hd: hd ,url: url , image: image};
+                    console.log("title - " + title);
+                    // console.log(JSON.stringify(item));
+                    items.push(item);
+                });
+                // console.log(JSON.stringify(items));
+                return items ;
+            },
+            function (items) {
+                // var resJsonObj = {"data":[{"title":123},{"title":222}]};
+                var resJsonObj = {'code':"1",'msg':"获取成功",'data':items};
+                console.log(JSON.stringify(items));
+
+                if(items.length==0){
+                    var resJsonObj = {'code':"1",'msg':"获取成功",'data':items};
+                    res.end(JSON.stringify(resJsonObj));
+                }else{
+
+                    Film.create(items, function (err, docs) {
+                        if (err) {
+                            // TODO: handle error
+                            console.info(err);
+                        } else {
+                            console.info('%d potatoes were successfully stored.', docs.length);
+                            console.info( DateUtil.now() +  ' -- new films has save successfully !');
+                        }
+
+                    });
+                    // var resJsonObj = {'code':"1",'msg':"获取成功",'data':items};
+                    // res.end(JSON.stringify(resJsonObj));
+                    // for(var i=0; i< items.length; i++){
+                    //     var _film = items[i];
+                    //     Film.findOne({url:_film.url},function (err,film) {
+                    //         if(err){
+                    //             console.log(err);
+                    //         }
+                    //         if (film){
+                    //             console.warn( DateUtil.now() +  ' -- film has exist !');
+                    //            // continue;
+                    //         }else{
+                    //             film = new Film(_film);
+                    //             film.save(function (err,user) {
+                    //                 if (err){
+                    //                     console.log(err);
+                    //                 }
+                    //                 console.info( DateUtil.now() +  ' -- new film has save successfully !');
+                    //             });
+                    //         }
+                    //     });
+                    // }
+
+                    craw(type,++page);
+                }
+
+
+
+            });
+    }
+
+
 }
