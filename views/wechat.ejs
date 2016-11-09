@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/aui/aui.2.0.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+    <header class="aui-bar aui-bar-nav">
+      <a class="aui-pull-left aui-btn">
+        <span class="aui-iconfont aui-icon-left"></span>返回
+      </a>
+      <div class="aui-title">Title</div>
+      <% if(typeof user !== 'undefined'){ %>
+      <a class="aui-pull-right aui-btn" href="/user/userCenter">
+        </span><%= user.name %>
+      </a>
+      <% }else{ %>
+      <a class="aui-pull-right aui-btn"  href="/user/signin">
+        <span class="aui-iconfont aui-icon-left"></span>登录
+      </a>
+      <% } %>
+    </header>
+    <div class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+          简单的列表布局
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-title"><a href="/app">app</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-title"><a href="/crawler/huozhoutvNews?page=1">霍州新闻</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-title"><a href="/crawler/raylijuhe">rayli聚合</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-title"><a href="/user/signup">注册</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner">
+            <div class="aui-list-item-title"><a href="/user/signin">登录</a></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="aui-content aui-margin-b-15">
+      <ul class="aui-list aui-list-in">
+        <li class="aui-list-header">
+          带有右侧箭头
+        </li>
+        <li class="aui-list-item aui-list-item-middle">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title"><a href="http://www.eqxiu.com/site/show">易企秀</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item aui-list-item-middle">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title"><a href="/user/search">查询用户</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item aui-list-item-middle">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title"><a href="/film/showList?type=1&page=1">电影列表</a></div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5NDAzNjA5MQ==&scene=110#wechat_redirect">关注我</a>
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="weixin://contacts/profile/gh_f76f02944188">点击这里添加Baidufe公众号</a>
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="http://mp.weixin.qq.com/s?__biz=MjM5NDAzNjA5MQ==&tempkey=QGpuhgj42oC2Bmym%2BPU6DihxMMR5ovHeabqoga2r7x3krHiDALEyCYiSBtAdue%2B8&appmsgid=10000004&itemidx=1&sign=b5056c007b4f63e400b56656d962f26e#wechat_redirect">别人能看到的链接文字</a>
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&scene=110&__biz=MjM5NDAzNjA5MQ==#wechat_redirect">http://www.xddwz.com/</a>
+              <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5NDAzNjA5MQ==&scene=110#wechat_redirect">sdfsdfsdf</a>
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="http://demo.open.weixin.qq.com/jssdk">DEMO页面：</a>
+            </div>
+          </div>
+        </li>
+        <li class="aui-list-item">
+          <div class="aui-list-item-inner aui-list-item-arrow">
+            <div class="aui-list-item-title">
+              <a href="http://rayli.yicp.io/wechat/jsDome">自己的微信jsDome：</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

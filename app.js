@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require("multer");
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 //站点配置
@@ -11,13 +12,8 @@ var settings = require("./app/db/settings");
 // 数据库
 var mongoose = require('mongoose');
 mongoose.connect(settings.URL);
-
+//路由
 var routes = require('./routes/index');
-var user = require('./routes/user');
-var download = require('./routes/download');
-var appDownLoad = require('./routes/app');
-var crawler = require('./routes/crawler');
-
 
 var app = express();
 
@@ -28,10 +24,17 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true  }));
-app.use(cookieParser());
+app.use(bodyParser.json({limit: '50mb'})); // 限制上传5M
+app.use(bodyParser.urlencoded({ extended: true , limit: '50mb' }));
+/*文件上传*/
+app.use(multer({ dest: '/tmp/'}).array('image'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 如果需要 session 支持，sessionStore 必须放在 watch 之后
+var wechat = require('./routes/wechat');
+app.use('/wechat', wechat);
+
+app.use(cookieParser());
 app.use(session({
   secret: 'rayli',
   store: new mongoStore({
@@ -44,10 +47,6 @@ app.use(session({
 }));
 
 app.use('/', routes);
-app.use('/user', user);
-app.use('/app', appDownLoad);
-app.use('/download', download);
-app.use('/crawler', crawler);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
