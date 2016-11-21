@@ -6,7 +6,7 @@ var appDownLoad = require('./app');
 var crawler = require('./crawler');
 var api = require('./api');
 var film = require('./film');
-var wechat = require('./wechat');
+// var wechat = require('./wechat');
 
 
 /* GET home page. */

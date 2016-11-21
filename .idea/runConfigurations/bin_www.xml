@@ -3,6 +3,7 @@
     <envs>
       <env name="DEBUG" value="dome3:*" />
       <env name="WX_TOKEN" value="davinci" />
+      <env name="PORT" value="8080" />
     </envs>
     <browser url="http://localhost:3000/" />
     <profiling v8-profiler-path="" />

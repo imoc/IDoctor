@@ -2,7 +2,7 @@
  * Created by lilxiaowei on 2016-10-31.
  */
 var mongoose = require('mongoose');
-var Film = require('../models/Film');
+var Film = require('../models/film');
 var DateUtil = require('../../util/DateUtil');
 
 exports.showList = function (req,res) {
