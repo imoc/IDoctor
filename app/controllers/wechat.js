@@ -46,18 +46,11 @@ function validate_token(req,res){
 //闻喜培优教育 测试环境
 var config = {
     token : 'davinci',
-    appid : 'wxa7c061fbe91e3caa',
-    appsecret :'270e6bb2a377551853180af6f1b0c2bb',
-    encodingAESKey : 'X4vgr2jq9wEWFR8zcqJ7NhkVWSukxmBAvgK5RyiVK8x'
+    appid : 'wxab7c061fbe91e3caa',
+    appsecret :'27b0e6bb2a377551853180af6f1b0c2bb',
+    encodingAESKey : 'X4bvgr2jq9wEWFR8zcqJ7NhkVWSukxmBAvgK5RyiVK8x'
 };
 var client = new OAuth(config.appid, config.appsecret);
-//闻喜培优教育 生产环境
-// var config = {
-//     token : 'davinci',
-//     appid : 'wxf923e19478b71005',
-//     appsecret :'01cce64ae5c5005704a3d8411f308e99',
-//     encodingAESKey : 'X4vgr2jq9wEWFR8zcqJ7NhkVWSukxmBAvgK5RyiVK8x'
-// };
 
 exports.showPage = function (req,res,next) {
     res.render('wechat',{

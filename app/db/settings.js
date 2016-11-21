@@ -16,12 +16,12 @@ module.exports = {
     expiresIn:'2h',//token 过期时间 expressed in seconds or a string describing a time span rauchg/ms. Eg: 60s, "2 days", "10h", "7d"
     
 //    数据库配置
-    URL: 'mongodb://rayli:rayli_comely@120.77.32.19:27017/rayli',
+    URL: 'mongodb://127.0.0.1:27017/rayli',
     DB: 'rayli',
-    HOST: '120.77.32.19',
+    HOST: '127.0.0.1',
     PORT: 27017,
-    USERNAME: 'rayli',
-    PASSWORD: 'rayli_comely',
+    USERNAME: '',
+    PASSWORD: '',
 
 /*
 
